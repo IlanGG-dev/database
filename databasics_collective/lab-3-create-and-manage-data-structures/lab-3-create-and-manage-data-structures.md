@@ -21,6 +21,7 @@ Estimated Time: 20 minutes
 1. Run the following statements as a script.
 
     ```sql
+    <copy>
     CREATE TABLE dbc_departments (
         department_id   NUMBER(4),
         department_name VARCHAR2(100) NOT NULL,
@@ -45,7 +46,10 @@ Estimated Time: 20 minutes
             FOREIGN KEY (department_id)
             REFERENCES dbc_departments (department_id)
     );
+    </copy>
     ```
+
+    The first statement creates the department table. Its primary key gives each department a unique ID. The unique constraint prevents duplicate department names. The second statement creates the student table. It requires a student name, email, and department. Defaults supply the enrollment date and status. The check constraint limits status values. The foreign key ensures that every student belongs to an existing department.
 
 2. Confirm that the result reports two successful DDL statements. If a table already exists, ask your instructor whether your environment uses demo-ready mode.
 
@@ -54,6 +58,7 @@ Estimated Time: 20 minutes
 1. Run the next two statements as a script.
 
     ```sql
+    <copy>
     CREATE TABLE dbc_courses (
         course_id      NUMBER(6),
         course_code    VARCHAR2(20) NOT NULL,
@@ -83,7 +88,10 @@ Estimated Time: 20 minutes
         CONSTRAINT dbc_enroll_grade_ck
             CHECK (grade IN ('A', 'B', 'C', 'D', 'F') OR grade IS NULL)
     );
+    </copy>
     ```
+
+    The first statement creates courses and connects each course to a department. It limits credits to values from 1 through 6. The second statement creates the junction table between students and courses. Its two-column primary key prevents duplicate enrollments. The foreign keys require valid students and courses. A grade may remain empty, but any stored grade must be one of the listed values.
 
 2. Notice the creation order. Parent tables must exist before a foreign key can reference them.
 
@@ -92,6 +100,7 @@ Estimated Time: 20 minutes
 1. Query the data dictionary.
 
     ```sql
+    <copy>
     SELECT table_name,
            column_id,
            column_name,
@@ -101,29 +110,41 @@ Estimated Time: 20 minutes
     FROM   user_tab_columns
     WHERE  table_name LIKE 'DBC\_%' ESCAPE '\'
     ORDER  BY table_name, column_id;
+    </copy>
     ```
+
+    This query reads `USER_TAB_COLUMNS`, which describes columns in tables owned by the current user. The `WHERE` clause keeps names that begin with `DBC_`. `ESCAPE '\'` treats the underscore as a character instead of a wildcard. The result shows the type, size, position, and null setting for each column.
 
 2. Find one `NUMBER`, one `VARCHAR2`, and one `DATE` column. Check `NULLABLE` for a required column. Oracle also supports `JSON`, `VECTOR`, `CLOB`, and `BLOB`.
 
 3. Add a temporary column.
 
     ```sql
+    <copy>
     ALTER TABLE dbc_students
         ADD (preferred_name VARCHAR2(50));
+    </copy>
     ```
+
+    This statement adds an optional text column to the student table. It has no `NOT NULL` rule or default value. Existing and future rows may therefore leave `PREFERRED_NAME` empty.
 
 4. Rerun the query from Step 1 and find `PREFERRED_NAME`. Then restore the planned design.
 
     ```sql
+    <copy>
     ALTER TABLE dbc_students
         DROP COLUMN preferred_name;
+    </copy>
     ```
+
+    This statement removes the temporary column and restores the original design. Dropping a column also removes its stored values. Use this operation carefully outside a practice environment.
 
 ## Task 4: Inspect the constraints
 
 1. Run this query.
 
     ```sql
+    <copy>
     SELECT table_name,
            constraint_name,
            constraint_type,
@@ -131,7 +152,10 @@ Estimated Time: 20 minutes
     FROM   user_constraints
     WHERE  table_name LIKE 'DBC\_%' ESCAPE '\'
     ORDER  BY table_name, constraint_type, constraint_name;
+    </copy>
     ```
+
+    This query reads `USER_CONSTRAINTS`, which describes rules on objects owned by the current user. It returns each table, rule name, rule type, and enforcement status. Sorting by table and type makes related constraints easier to compare.
 
 2. Interpret the constraint types:
 

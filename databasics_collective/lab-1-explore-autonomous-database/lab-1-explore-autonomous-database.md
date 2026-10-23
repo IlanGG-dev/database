@@ -22,11 +22,13 @@ Estimated Time: 10 minutes
 2. Run this query.
 
     ```sql
+    <copy>
     SELECT SYS_CONTEXT('USERENV', 'CURRENT_USER') AS current_user,
            SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS current_schema,
            SYS_CONTEXT('USERENV', 'SERVICE_NAME') AS service_name,
            SYS_CONTEXT('USERENV', 'CON_NAME') AS container_name
     FROM   dual;
+    </copy>
     ```
 
 3. Read the result. Your user owns a schema with the same name. The service connects your worksheet to the database, and the container identifies the pluggable database that holds your schema.
@@ -36,9 +38,11 @@ Estimated Time: 10 minutes
 1. Run the following query.
 
     ```sql
+    <copy>
     SELECT banner_full
     FROM   v$version
     WHERE  banner_full LIKE 'Oracle Database%';
+    </copy>
     ```
 
 2. Record the database version shown in the result. Version-specific behavior matters when you use newer features, but the SQL in this workshop uses common Oracle Database features.
@@ -48,27 +52,33 @@ Estimated Time: 10 minutes
 1. List the tables that your user owns.
 
     ```sql
+    <copy>
     SELECT table_name
     FROM   user_tables
     ORDER  BY table_name;
+    </copy>
     ```
 
 2. Count your objects by type.
 
     ```sql
+    <copy>
     SELECT object_type, COUNT(*) AS object_count
     FROM   user_objects
     GROUP  BY object_type
     ORDER  BY object_type;
+    </copy>
     ```
 
 3. Check for objects from an earlier workshop run.
 
     ```sql
+    <copy>
     SELECT object_type, object_name, status
     FROM   user_objects
     WHERE  object_name LIKE 'DBC\_%' ESCAPE '\'
     ORDER  BY object_type, object_name;
+    </copy>
     ```
 
 4. If the last query returns rows, ask your instructor whether the environment uses the demo-ready mode. Do not delete existing objects unless the instructor asks you to reset the dedicated workshop schema.
