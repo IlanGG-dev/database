@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Oracle Autonomous Database manages infrastructure tasks such as patching, backups, and routine tuning. You manage your schema, SQL, and application data. In this lab, you will identify your current database session and inspect the objects that belong to your user.
+Before you create anything, take a quick look at the database you are using. Autonomous Database handles patching, backups, and routine tuning. You will focus on your schema, SQL, and data.
 
 ### Objectives
 
-In this lab, you will:
+You will:
 
 - Identify your current user, schema, service, and container.
 - Distinguish the database from the objects in your schema.
@@ -31,7 +31,7 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-3. Read the result. Your user owns a schema with the same name. The service connects your worksheet to the database, and the container identifies the pluggable database that holds your schema.
+3. Read the result. Your user and schema will normally have the same name. `SERVICE_NAME` shows the service used by the worksheet. `CONTAINER_NAME` shows the pluggable database that contains your schema.
 
 ## Task 2: Inspect the database version
 
@@ -45,7 +45,7 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-2. Record the database version shown in the result. Version-specific behavior matters when you use newer features, but the SQL in this workshop uses common Oracle Database features.
+2. Write down the database version. Some newer features depend on the version, but this workshop stays with common Oracle Database features.
 
 ## Task 3: Inspect your schema
 
@@ -81,7 +81,7 @@ Estimated Time: 10 minutes
     </copy>
     ```
 
-4. If the last query returns rows, ask your instructor whether the environment uses the demo-ready mode. Do not delete existing objects unless the instructor asks you to reset the dedicated workshop schema.
+4. If the last query returns rows, your instructor may have prepared the schema already. Ask whether you are using demo-ready mode. Do not remove the objects unless your instructor asks you to reset the workshop schema.
 
 ## Task 4: Connect the concepts
 
@@ -95,11 +95,11 @@ Estimated Time: 10 minutes
     | Schema | Objects owned by one user |
     | Autonomous Database | Oracle manages the service; you manage schemas and SQL |
 
-2. Oracle Database can run on-premises, on Exadata, through Cloud@Customer, or in cloud services. This workshop uses Autonomous Database to stay focused on SQL.
+2. Oracle Database can run on-premises, on Exadata, through Cloud@Customer, or in the cloud. We use Autonomous Database here so you can stay focused on SQL.
 
-3. Oracle also supports JSON, spatial, graph, and vector data. This workshop starts with relational tables.
+3. Oracle also supports JSON, spatial, graph, and vector data. We will start with relational tables.
 
-4. Continue when you can identify your schema, explain `USER_TABLES`, and describe what Autonomous Database manages.
+4. Move on when you can identify your schema, explain `USER_TABLES`, and describe what Autonomous Database manages.
 
 ## Acknowledgements
 

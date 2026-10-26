@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Data manipulation language statements read and change table rows. In this lab, you will load a small dataset, query related tables, and use a savepoint to test changes without keeping them.
+The tables are ready. Add a small dataset, join the related rows, and then test a few changes without keeping them.
 
 ### Objectives
 
-In this lab, you will:
+You will:
 
 - Insert related rows in the correct order.
 - Filter, sort, join, and aggregate data with `SELECT`.
@@ -29,7 +29,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    This statement adds three rows with one command. Each `INTO` clause supplies one department. The final `SELECT` runs the multi-table insert once. Departments load first because students and courses will reference them.
+    `INSERT ALL` adds the three departments with one command. Each `INTO` clause adds one row. Load departments first because students and courses will reference them.
 
 2. Insert the students.
 
@@ -64,7 +64,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    This statement adds four students. The column list shows where Oracle places each value. The `DATE` keyword creates exact date values without relying on session display settings. Every department ID matches a department created in Step 1.
+    `INSERT ALL` adds four students. The column list shows where each value belongs. `DATE` creates an exact date and avoids session-format differences. Each department ID matches a row from Step 1.
 
 3. Insert the courses and enrollments.
 
@@ -89,11 +89,11 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    The first statement adds four courses. The second adds five links between students and courses. A `NULL` grade means that no grade exists yet. `COMMIT` saves all rows and ends the transaction.
+    The first statement adds four courses. The second adds five enrollments that connect students to those courses. A `NULL` grade means that the course has no grade yet. `COMMIT` saves the rows.
 
-4. The commit makes the sample rows permanent and ends the transaction.
+4. The commit ends the transaction. The sample rows will remain after you close the worksheet.
 
-5. The demo-ready scripts use `MERGE` to update matching rows or insert missing rows. This makes repeated loads predictable.
+5. Demo-ready mode uses `MERGE`. It updates a matching row or inserts a missing row, so the setup can run more than once.
 
 ## Task 2: Filter and sort rows
 
@@ -109,7 +109,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    This query returns only active students from department 10. The `WHERE` clause applies both conditions. `ORDER BY` sorts the matching rows by last name and then first name.
+    `WHERE` keeps active students from department 10. `ORDER BY` sorts them by last name and then first name.
 
 2. Change the filter to another department and run the query again.
 
@@ -132,7 +132,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    This query combines four related tables. Each `JOIN` matches primary and foreign key values. The expression with `||` joins first and last names into one display value. The result shows every student enrollment with department and course details.
+    The joins follow the primary and foreign keys from one table to the next. The `||` operator combines first and last names for display. The result shows each enrollment with its student, department, and course.
 
 2. Count students in each course.
 
@@ -148,13 +148,13 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    This query groups enrollment rows by course and counts the students in each group. The `LEFT JOIN` keeps courses with no enrollments. Such courses receive a count of zero because `COUNT` ignores `NULL` student IDs.
+    `GROUP BY` collects the rows for each course, and `COUNT` totals the students. The `LEFT JOIN` also keeps courses with no enrollments. Those courses get a count of zero.
 
-3. Notice how the foreign keys supply the join conditions. The tables store each department, student, and course once.
+3. The foreign keys give you the join conditions. Each department, student, and course still lives in only one table.
 
 ## Task 4: Test data changes inside a transaction
 
-1. Oracle locks changed rows until `COMMIT` or `ROLLBACK`. Other sessions can read committed versions, but another writer on the same row may wait.
+1. Oracle locks changed rows until `COMMIT` or `ROLLBACK`. Other sessions can still read the last committed version. Another session that tries to change the same row may need to wait.
 
 2. Create a savepoint, then insert, update, and delete specific rows.
 
@@ -179,7 +179,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    `SAVEPOINT` marks the start of the practice changes. `INSERT` adds a temporary student. `UPDATE` pauses one student, and `DELETE` removes one specific enrollment. Both change statements use precise `WHERE` conditions to avoid affecting other rows.
+    `SAVEPOINT` marks where the practice begins. The next statements add one student, pause another, and remove one enrollment. The `WHERE` clauses keep the changes limited to the intended rows.
 
 3. Check the pending changes before you commit them.
 
@@ -196,7 +196,7 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    The first query displays the new student and the changed status. The second checks whether the deleted enrollment remains. These queries show the uncommitted changes inside the current session.
+    The first query shows the new student and the changed status. The second checks the enrollment you removed. Your session can see these changes even though you have not committed them.
 
 4. Undo every change made after the savepoint.
 
@@ -207,11 +207,11 @@ Estimated Time: 25 minutes
     </copy>
     ```
 
-    `ROLLBACK TO` reverses every change made after the savepoint. The final `COMMIT` ends the transaction and keeps the earlier sample data. None of the practice changes become permanent.
+    `ROLLBACK TO` removes everything done after the savepoint. The final `COMMIT` ends the transaction and keeps the original sample data. The practice changes do not remain.
 
 5. Run the two verification queries again. Student `1999` should be absent, student `1002` should be active, and student `1004` should have an enrollment.
 
-6. Use the same safety pattern for future experiments. Target rows with a `WHERE` clause, inspect the result, then choose `COMMIT` or `ROLLBACK`.
+6. Use the same pattern for future experiments: target rows with `WHERE`, check the result, and then choose `COMMIT` or `ROLLBACK`.
 
 ## Acknowledgements
 

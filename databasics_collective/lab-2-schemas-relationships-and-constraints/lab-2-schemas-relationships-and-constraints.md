@@ -2,11 +2,11 @@
 
 ## Introduction
 
-A useful database model stores each fact once and links related facts with keys. In this lab, you will turn a flat student roster into four related tables. The design will support data integrity and the SQL exercises in later labs.
+Start with the design. The flat student roster repeats the same facts many times. You will split it into four related tables so each fact appears once.
 
 ### Objectives
 
-In this lab, you will:
+You will:
 
 - Find repeated facts in a flat data set.
 - Separate those facts into related tables.
@@ -24,9 +24,9 @@ Estimated Time: 15 minutes
     COURSE_CODE, COURSE_TITLE, CREDITS, ENROLLED_ON, GRADE
     ```
 
-2. Identify the facts that repeat when a student takes several courses. The student name and department would appear once for every enrollment. Course details would repeat for every student in the course.
+2. Look for facts that repeat. A student name and department would appear once for every enrollment. Course details would appear once for every student in that course.
 
-3. Note the risk: changing a department location would require updates to many rows. Missing one row would leave conflicting values.
+3. Think about a department location change. You would need to update several rows, and missing one would leave conflicting data.
 
 ## Task 2: Separate the entities
 
@@ -48,9 +48,9 @@ Estimated Time: 15 minutes
     DBC_COURSES     1 ----- many DBC_ENROLLMENTS
     ```
 
-3. Explain why `DBC_ENROLLMENTS` resolves the many-to-many relationship between students and courses. One student can take many courses, and one course can contain many students.
+3. `DBC_ENROLLMENTS` connects students and courses. One student can take many courses, and one course can have many students. The enrollment table stores each student-course pair once.
 
-4. A one-to-one relationship links one row to at most one row, such as a student and one current identity card. The model above also shows one-to-many and many-to-many relationships.
+4. A one-to-one relationship links one row to no more than one other row. A student and one current identity card are a simple example. The workshop model also uses one-to-many and many-to-many relationships.
 
 ## Task 3: Choose the constraints
 
@@ -74,15 +74,15 @@ Estimated Time: 15 minutes
     DBC_ENROLLMENTS(student_id, course_id, enrolled_on, grade)
     ```
 
-3. Confirm that every foreign key points to a primary key and that the enrollment table uses both foreign keys as its primary key.
+3. Check the foreign keys. Each one points to a primary key. The enrollment table combines its two foreign keys to create its own primary key.
 
-4. The entities form a conceptual model. Keys and relationships form the logical model. The next lab creates the Oracle physical model.
+4. The entities give you the main idea, or conceptual model. Keys and relationships turn it into a logical model. In the next lab, you will create the actual Oracle tables.
 
 ## Task 4: Prepare for deployment
 
-1. Note the naming boundary: every workshop object starts with `DBC_`. Future automation can find these objects without changing unrelated schema content.
+1. Every workshop object starts with `DBC_`. A future setup script can find these objects without touching unrelated content in the schema.
 
-2. Use learner build mode to create the objects yourself. A future demo-ready deployment can run the repeatable scripts in `workshops/tenancy/sql`.
+2. In learner build mode, you will create the objects yourself. Demo-ready mode can use the repeatable scripts in `workshops/tenancy/sql`.
 
 ## Acknowledgements
 

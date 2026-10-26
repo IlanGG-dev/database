@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Every application needs a reliable way to organize and retrieve data. In this workshop, you will use Oracle Autonomous Database to build a small university learning system. The system tracks departments, students, courses, and course enrollments.
+You will build a small university database in Oracle Autonomous Database. It tracks departments, students, courses, and enrollments. The example stays small so the database concepts remain easy to follow.
 
-You will work in the Database Actions SQL Worksheet. Each lab introduces one part of the database workflow, from schema design through data changes and indexes. The examples use a fictional dataset and objects whose names start with `DBC_`.
+Run the SQL in the Database Actions SQL Worksheet. The five labs follow the same project: design the schema, create it, add data, and finish with indexes. All workshop objects start with `DBC_` so they are easy to recognize.
 
 ### Prerequisites
 
@@ -15,9 +15,9 @@ You will work in the Database Actions SQL Worksheet. Each lab introduces one par
 
 ### Objectives
 
-By the end of this workshop, you will be able to:
+After the workshop, you can:
 
-- Explain the difference between a database, a database management system, and a schema.
+- Explain the difference between a database, a DBMS, and a schema.
 - Design a small relational model with primary keys and foreign keys.
 - Create tables and constraints with Oracle SQL.
 - Insert, query, update, and delete data within a transaction.

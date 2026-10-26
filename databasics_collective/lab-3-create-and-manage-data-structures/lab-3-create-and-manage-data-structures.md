@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Data definition language statements create and change schema objects. In this lab, you will use `CREATE TABLE` to build the four-table model and use data dictionary views to confirm the result.
+Turn the design into Oracle tables. Create the four tables, add their rules, make one small change, and then check the structure.
 
 ### Objectives
 
-In this lab, you will:
+You will:
 
 - Create tables with Oracle data types.
 - Modify a table with `ALTER TABLE`.
@@ -49,9 +49,11 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The first statement creates the department table. Its primary key gives each department a unique ID. The unique constraint prevents duplicate department names. The second statement creates the student table. It requires a student name, email, and department. Defaults supply the enrollment date and status. The check constraint limits status values. The foreign key ensures that every student belongs to an existing department.
+    Start with departments because students will reference them. The primary key identifies each department, and the unique rule prevents repeated department names.
 
-2. Confirm that the result reports two successful DDL statements. If a table already exists, ask your instructor whether your environment uses demo-ready mode.
+    The student table requires a name, email, and department. It fills in the enrollment date and status when you omit them. The check rule accepts only the three listed status values. The foreign key accepts only departments that already exist.
+
+2. You should see two successful DDL statements. If Oracle reports that a table already exists, ask your instructor whether the schema uses demo-ready mode.
 
 ## Task 2: Create the course and enrollment tables
 
@@ -91,9 +93,11 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    The first statement creates courses and connects each course to a department. It limits credits to values from 1 through 6. The second statement creates the junction table between students and courses. Its two-column primary key prevents duplicate enrollments. The foreign keys require valid students and courses. A grade may remain empty, but any stored grade must be one of the listed values.
+    Courses also belong to a department, and the credit rule accepts values from 1 through 6.
 
-2. Notice the creation order. Parent tables must exist before a foreign key can reference them.
+    `DBC_ENROLLMENTS` is the bridge between students and courses. Its two-column primary key prevents the same enrollment from appearing twice. A grade can stay empty until the course is complete. When a grade is present, it must match one of the listed values.
+
+2. Notice the order. A parent table must exist before another table can reference it with a foreign key.
 
 ## Task 3: Inspect the columns
 
@@ -113,7 +117,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    This query reads `USER_TAB_COLUMNS`, which describes columns in tables owned by the current user. The `WHERE` clause keeps names that begin with `DBC_`. `ESCAPE '\'` treats the underscore as a character instead of a wildcard. The result shows the type, size, position, and null setting for each column.
+    `USER_TAB_COLUMNS` lists the columns owned by your user. The filter keeps only names that begin with `DBC_`. The `ESCAPE '\'` part treats the underscore as a real character, not a wildcard. Check the type, size, order, and null setting for each column.
 
 2. Find one `NUMBER`, one `VARCHAR2`, and one `DATE` column. Check `NULLABLE` for a required column. Oracle also supports `JSON`, `VECTOR`, `CLOB`, and `BLOB`.
 
@@ -126,7 +130,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    This statement adds an optional text column to the student table. It has no `NOT NULL` rule or default value. Existing and future rows may therefore leave `PREFERRED_NAME` empty.
+    You just added an optional text column. It has no default and no `NOT NULL` rule, so it can remain empty.
 
 4. Rerun the query from Step 1 and find `PREFERRED_NAME`. Then restore the planned design.
 
@@ -137,7 +141,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    This statement removes the temporary column and restores the original design. Dropping a column also removes its stored values. Use this operation carefully outside a practice environment.
+    `DROP COLUMN` removes the temporary column and returns the table to the original design. It also removes any values stored in that column, so take care outside a practice schema.
 
 ## Task 4: Inspect the constraints
 
@@ -155,7 +159,7 @@ Estimated Time: 20 minutes
     </copy>
     ```
 
-    This query reads `USER_CONSTRAINTS`, which describes rules on objects owned by the current user. It returns each table, rule name, rule type, and enforcement status. Sorting by table and type makes related constraints easier to compare.
+    `USER_CONSTRAINTS` lists the rules on objects owned by your user. The result shows each rule name, type, and status. Sorting the rows makes the related rules easier to compare.
 
 2. Interpret the constraint types:
 
@@ -164,7 +168,7 @@ Estimated Time: 20 minutes
     - `U` identifies a unique constraint.
     - `C` identifies a check constraint or a generated `NOT NULL` rule.
 
-3. Remember that Oracle commits pending work before and after DDL, including `CREATE`, `ALTER`, `RENAME`, and `DROP`. Keep schema changes separate from transaction exercises when you need the option to roll back data changes.
+3. Oracle commits pending work before and after DDL such as `CREATE`, `ALTER`, `RENAME`, and `DROP`. Keep DDL separate from data changes when you may need a rollback.
 
 ## Acknowledgements
 
