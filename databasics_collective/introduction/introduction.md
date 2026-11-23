@@ -24,7 +24,7 @@ After the workshop, you can:
 - Create a view, sequence, synonym, and indexes.
 - Inspect database objects through Oracle data dictionary views.
 
-Estimated Workshop Time: 90 minutes
+Estimated Workshop Time: 55 minutes
 
 ## Acknowledgements
 
