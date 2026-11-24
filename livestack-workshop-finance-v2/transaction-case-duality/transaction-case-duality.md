@@ -47,7 +47,7 @@ The application uses this document shape, while the database keeps the transacti
 Estimated Time: **10 minutes**
 
 <video controls width="100%">
-  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F02-Finance%20Workshop_LAB-2_with-CC.mp4">
+  <source src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/4Au3jJ-t8Wtw3LWyYsDMqQk2FdlXDvXCb1MYRS0J6P4QS-GCrv2YNOolWdtFMLZq/n/c4u04/b/livelabsfiles/o/livestack%2FVideos%2FFinance%2F02-Finance%20Workshop_LAB-2_with-CC.mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -177,13 +177,13 @@ Thomas now tests the document shape his application can consume directly.
 
 This query selects the JSON `DATA` column from `ORDERS_DV` so Thomas can inspect the document shape in SQL Worksheet.
 
-    <details>
-    <summary><strong>Optional context: Why this matters to Thomas</strong></summary>
+<details>
+<summary><strong>Optional context: Why this matters to Thomas</strong></summary>
 
-    > Thomas can use a JSON Collection Table when the application owns the document. But the transaction already has relational tables that Jessica and other teams rely on.
-    > The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the transaction into another store.
+> Thomas can use a JSON Collection Table when the application owns the document. But the transaction already has relational tables that Jessica and other teams rely on.
+> The duality view gives Thomas a document over those existing rows. He can choose the application shape without copying the transaction into another store.
 
-    </details>
+</details>
 
 1. Run this query:
 
