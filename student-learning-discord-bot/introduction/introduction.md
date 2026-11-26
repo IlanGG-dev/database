@@ -35,13 +35,6 @@ Keep Compute port 3000 closed to public ingress. Nginx proxies traffic locally t
 
 The ZIP excludes `.env`, wallet files, and credentials. Download the wallet from Autonomous Database, transfer it securely to Compute, and create `.env` there. Use synthetic data. Channel members can see bot replies in a server channel.
 
-## Workshop Labs
-
-1. Lab 1: Prepare OCI Compute, Autonomous Database, wallet access, and an HTTPS endpoint (35 minutes).
-2. Lab 2: Download the bot package and configure Discord and OpenRouter (25 minutes).
-3. Lab 3: Configure database storage, memory, and LiveLabs search (35 minutes).
-4. Lab 4: Run the service and verify Discord workflows (30 minutes).
-
 ## Acknowledgements
 
 - Authors: Cyrce Salinas Rojas and Ilan Gómez Guerrero
