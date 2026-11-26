@@ -389,7 +389,7 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
-    ![Validate the HTTPS Nginx configuration and reload Nginx](./images/lab-1-24-validate-https-nginx-config.png)
+    ![Validate the HTTPS Nginx configuration and reload Nginx](./images/lab-1-24-validate-nginx-config.png)
 
 10. Add a deploy hook so Nginx reloads after Certbot renews the short-lived certificate. Then test renewal and confirm the Certbot timer is active.
 
