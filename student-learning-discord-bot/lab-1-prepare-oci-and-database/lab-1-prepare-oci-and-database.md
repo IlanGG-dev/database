@@ -150,8 +150,6 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
     ![Autonomous AI Database creation form](./images/lab-1-14-database-create-form.png)
 
-    ![Select the Transaction Processing workload for Autonomous AI Database](./images/lab-1-15-select-autonomous-db-workload.png)
-
 2. Set a database administrator password in your password manager. Start database creation and wait until the state is **Available**.
 
 3. Open the database details page, select **Database connection**, and download the instance wallet. Set a strong wallet password. Keep the downloaded ZIP on your workstation until you transfer it over SSH.
