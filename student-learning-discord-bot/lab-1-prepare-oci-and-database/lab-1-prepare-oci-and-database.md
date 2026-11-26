@@ -249,7 +249,7 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
-    ![Configure the Nginx HTTP site and validate its configuration](./images/lab-1-18-configure-nginx-http-site.png)
+    ![Configure the Nginx HTTP site and validate its configuration](./images/lab-1-18-nginx-http-configuration.png)
 
 5. Test the HTTP challenge path. On Compute, create a test file and request it locally. From a computer outside OCI, request the same file by public IP. The response must not time out.
 
@@ -429,7 +429,17 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
 
     ![Verify Node.js, npm, Nginx, and wallet files on the Compute host](./images/lab-1-26-check-host-foundation.png)
 
-2. Continue to Lab 2. After the bot starts on port 3000, Nginx will proxy requests to it.
+2. From your workstation, replace `YOUR_PUBLIC_IP` and test HTTPS:
+
+    ```sh
+    <copy>
+    curl -sS -o /dev/null -w 'HTTP %{http_code}; TLS verification %{ssl_verify_result}\n' https://YOUR_PUBLIC_IP/
+    </copy>
+    ```
+
+    Expect a `502` until Lab 2 starts the bot. A TLS result of `0` confirms the certificate.
+
+3. Continue to Lab 2. After the bot starts on port 3000, Nginx will proxy requests to it.
 
 ## Acknowledgements
 
