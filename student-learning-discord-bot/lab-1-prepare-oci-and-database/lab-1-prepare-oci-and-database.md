@@ -249,7 +249,7 @@ Keep Compute TCP 3000 closed to the internet. Nginx accepts HTTPS on port 443 an
     </copy>
     ```
 
-    ![Configure the Nginx HTTP site and validate its configuration](./images/lab-1-18-nginx-http-configuration.png)
+    ![Configure the Nginx HTTP site and validate its configuration](./images/lab-1-18-validation.png)
 
 5. Test the HTTP challenge path. On Compute, create a test file and request it locally. From a computer outside OCI, request the same file by public IP. The response must not time out.
 
