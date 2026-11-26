@@ -18,13 +18,13 @@ In this lab, you will:
 ### Prerequisites
 
 - Finish Lab 1. You need system Node.js 24, SSH access, a reserved IP, and a valid IP certificate.
-- The hackathon-bot ZIP in OCI Object Storage
+- The [hackathon-bot ZIP in OCI Object Storage](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip).
 - Discord Developer Portal access and a private test server.
 - An OpenRouter API key and model name available to your account.
 
 ## Task 1: Download and Inspect the Bot Package
 
-1. Open the hackathon-bot ZIP link. Anyone with this link can download the file.
+1. Open the [hackathon-bot ZIP link](https://c4u02.objectstorage.us-ashburn-1.oci.customer-oci.com/p/9DEArLjsgbKXuJgQtSG95E8hMXRFtxgHR8jiHbqz4HgyVYXVnSo0SC_s-zq5CJA3/n/c4u02/b/hosted-files/o/hackathon-bot.zip). Anyone with this link can download the file.
 
 2. Download the package to the Compute host with the Object Storage PAR.
 
@@ -95,7 +95,7 @@ In this lab, you will:
     - **Scopes:** `applications.commands`, `bot`
     - **Permissions:** **View Channels**, **Send Messages**, **Read Message History**, **Attach Files**
 
-    Remove every other permission, including **Ban Members** and **Create Polls**, then select **Save Changes**.
+    Then select **Save Changes**.
 
     ![Configure the Guild Install scopes and permissions](./images/lab-2-10-configure-guild-install.png)
 
@@ -204,7 +204,7 @@ In this lab, you will:
     | `OPENROUTER_DATETIME_TIMEZONE` | No | Sets the IANA timezone used by the bot's datetime tool. Replace the example with your timezone if needed. An invalid value falls back to `America/New_York`. |
     | `OPENROUTER_AGENT_DATA_COLLECTION` | No | Controls provider eligibility for `/agent`. Keep `deny` unless you have reviewed and accepted a provider's data policy. Any other value is treated as `deny`. |
 
-    The data-collection setting applies to `/agent`. The bot uses `OPENROUTER_MODEL` for other AI features, including memory in Lab 3; there is no separate memory-model setting. With `deny`, some free-model requests may have fewer compatible providers.
+The data-collection setting applies to `/agent`. The bot uses `OPENROUTER_MODEL` for other AI features, including memory in Lab 3; there is no separate memory-model setting. With `deny`, some free-model requests may have fewer compatible providers.
 
 12. Save `.env`, then confirm its permissions.
 

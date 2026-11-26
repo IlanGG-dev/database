@@ -52,7 +52,7 @@ In this lab, you will:
 
 ## Task 2: Inspect the Service and Nginx
 
-1. Display the generated unit. Confirm it uses `/home/opc/hackathon-bot`, `/usr/bin/node`, and the unprivileged `opc` account. The app loads `.env` from its working directory.
+1. Display the generated unit. Confirm that the information displayed is correct.
 
     ```sh
     <copy>
@@ -61,6 +61,8 @@ In this lab, you will:
     sudo systemctl is-enabled discord-example.service
     </copy>
     ```
+
+    ![Review the generated systemd unit and confirm the service is active and enabled](./images/lab-4-systemd-unit-status.png)
 
 2. Review the current logs and confirm the bot reports `Listening on port 3000`.
 
